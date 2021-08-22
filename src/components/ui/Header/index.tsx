@@ -1,5 +1,17 @@
 import { AppBar, Toolbar, useScrollTrigger } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import logo from 'assets/images/logo.svg';
 import React from 'react';
+
+const useStyles = makeStyles((theme) => ({
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
+    marginBottom: theme.spacing(6)
+  },
+  logo: {
+    height: '7em'
+  }
+}));
 
 interface ElevationScrollProps {
   children: React.ReactElement;
@@ -19,14 +31,18 @@ const ElevationScroll = (props: ElevationScrollProps) => {
 };
 
 const Header: React.FC = (props) => {
+  const classes = useStyles();
+
   return (
     <React.Fragment>
       <ElevationScroll {...props}>
         <AppBar position="fixed">
-          <Toolbar>Arc Development</Toolbar>
+          <Toolbar disableGutters={true}>
+            <img src={logo} alt="Company Logo" className={classes.logo} />
+          </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <Toolbar />
+      <div className={classes.toolbarMargin}></div>
     </React.Fragment>
   );
 };

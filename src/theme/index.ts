@@ -1,21 +1,27 @@
 import { createTheme } from '@material-ui/core/styles';
 
+const arcBlue = '#0B72B9';
+const arcOrange = '#FFBA60';
+
 const theme = createTheme({
   palette: {
+    common: {
+      blue: arcBlue,
+      orange: arcOrange
+    },
     primary: {
-      light: 'rgba(255, 106, 0, 0.6)',
-      main: '#ff6a00',
+      main: arcBlue,
       contrastText: '#fff'
     },
     secondary: {
-      main: '#657179',
-      light: '#939fa8'
+      main: arcOrange,
+      contrastText: '#fff'
+    },
+    text: {
+      primary: '#fff'
     },
     background: {
       default: '#1C202B'
-    },
-    text: {
-      primary: '#ffffff'
     }
   },
   typography: {
@@ -23,7 +29,8 @@ const theme = createTheme({
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
-    fontWeightMedium: 500
+    fontWeightMedium: 500,
+    fontWeightBold: 700
   }
 });
 
