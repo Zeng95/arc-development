@@ -10,12 +10,10 @@ const theme = createTheme({
       orange: arcOrange
     },
     primary: {
-      main: arcBlue,
-      contrastText: '#fff'
+      main: arcBlue
     },
     secondary: {
-      main: arcOrange,
-      contrastText: '#fff'
+      main: arcOrange
     },
     text: {
       primary: '#fff'
@@ -30,6 +28,11 @@ const theme = createTheme({
       fontSize: '1rem',
       fontWeight: 700,
       textTransform: 'none'
+    },
+    estimate: {
+      fontFamily: 'Pacifico',
+      fontSize: '1rem',
+      color: 'white'
     }
   }
 });
@@ -54,7 +57,6 @@ export const appTheme = createTheme({
       disableTouchRipple: true
     },
     MuiButton: {
-      disableElevation: true,
       disableRipple: true,
       disableTouchRipple: true,
       disableFocusRipple: true
@@ -67,6 +69,9 @@ export const appTheme = createTheme({
   },
   overrides: {
     MuiButton: {
+      root: {
+        textTransform: 'none'
+      },
       containedPrimary: {
         borderRadius: 10,
         '&:hover': {
