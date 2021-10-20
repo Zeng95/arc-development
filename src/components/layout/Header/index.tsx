@@ -1,10 +1,17 @@
-import { AppBar, Tab, Tabs, Toolbar, useScrollTrigger } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import { AppBar, Button, Tab, Tabs, Toolbar, useScrollTrigger } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import logo from 'assets/images/logo.svg';
 import React, { useState } from 'react';
 
-const useStyles = makeStyles((theme) => ({
+// * Use the useScrollTrigger() hook to respond to user scroll actions.
+
+interface ElevationScrollProps {
+  children: React.ReactElement;
+}
+
+const tabList = ['Home', 'Services', 'The Revolution', 'About Us', 'Contact Us'];
+
+const useStyles = makeStyles(theme => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: theme.spacing(6)
@@ -29,47 +36,45 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-interface ElevationScrollProps {
-  children: React.ReactElement;
-}
-
 const ElevationScroll = (props: ElevationScrollProps) => {
-  const { children } = props;
-
   const trigger = useScrollTrigger({
+    // * Disable the hysteresis. Ignore the scroll direction when determining the trigger value.
     disableHysteresis: true,
+    // * Defaults to 100. Change the trigger value when the vertical scroll strictly crosses this threshold (exclusive).
     threshold: 0
   });
 
-  return React.cloneElement(children, {
+  return React.cloneElement(props.children, {
+    // * The class attribute .MuiPaper-elevation4 or .MuiPaper-elevation0 (box-shadow)
     elevation: trigger ? 4 : 0
   });
 };
 
-const tabList = ['Home', 'Services', 'The Revolution', 'About Us', 'Contact Us'];
-
-const Header: React.FC = (props) => {
+const Header: React.FC = props => {
   const classes = useStyles();
-
-  const [value, setValue] = useState(0);
+  const [selectedTab, setSelectedTab] = useState<number>(0);
 
   const handleTabsChange = (event: React.ChangeEvent<Record<string, unknown>>, newValue: number) => {
-    setValue(newValue);
+    setSelectedTab(newValue);
   };
 
   return (
-    <React.Fragment>
+    <>
       <ElevationScroll {...props}>
+        {/* fixed is the default value */}
         <AppBar position="fixed">
           <Toolbar disableGutters={true}>
-            <img src={logo} alt="Company Logo" className={classes.logo} />
+            {/* Logo */}
+            <img src={logo} alt="Website Logo" className={classes.logo} />
 
-            <Tabs value={value} onChange={handleTabsChange} className={classes.tabContainer}>
+            {/* Tabs */}
+            <Tabs value={selectedTab} onChange={handleTabsChange} className={classes.tabContainer} indicatorColor="primary">
               {tabList.map((tabItem: string) => (
                 <Tab key={tabItem} label={tabItem} className={classes.tabItem} />
               ))}
             </Tabs>
 
+            {/* 按钮 */}
             <Button variant="contained" color="secondary" className={classes.button}>
               Free Estimate
             </Button>
@@ -77,7 +82,7 @@ const Header: React.FC = (props) => {
         </AppBar>
       </ElevationScroll>
       <div className={classes.toolbarMargin}></div>
-    </React.Fragment>
+    </>
   );
 };
 
