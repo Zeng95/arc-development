@@ -16,7 +16,7 @@ const theme = createTheme({
       main: arcOrange
     },
     text: {
-      primary: '#fff'
+      primary: '#000'
     },
     background: {
       default: '#1C202B'
@@ -53,18 +53,8 @@ export const appTheme = createTheme({
   },
   props: {
     MuiButtonBase: {
-      disableRipple: true,
-      disableTouchRipple: true
-    },
-    MuiButton: {
-      disableRipple: true,
-      disableTouchRipple: true,
-      disableFocusRipple: true
-    },
-    MuiIconButton: {
-      disableRipple: true,
-      disableTouchRipple: true,
-      disableFocusRipple: true
+      disableRipple: false,
+      disableTouchRipple: false
     }
   },
   overrides: {
